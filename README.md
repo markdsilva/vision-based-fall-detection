@@ -33,6 +33,16 @@ This is a historical snapshot, and a fresh clone is **not a ready-to-run install
 
 The code uses Python, PyTorch, torchvision, OpenCV, NumPy, SciPy, Pillow, Matplotlib, and screeninfo. The desktop interface also requires Tkinter. Additional dependencies may be needed for dataset preparation or training.
 
+### Email configuration
+
+Both notification helpers read `FALL_NOTIFICATION_EMAIL` from the process environment for the configurable alert recipient and sender address. Set it to the address used by your own notification setup before running either demo. For example, in PowerShell:
+
+```powershell
+$env:FALL_NOTIFICATION_EMAIL = "your-alert-address@example.com"
+```
+
+Keep the real value outside Git. The helpers require this variable and do not load `.env` files automatically. Other legacy recipients and service settings remain in the helper scripts; review them before enabling notifications.
+
 ### Model files
 
 The default inference paths expect:
@@ -68,7 +78,7 @@ These commands describe the existing entry points; they have not been validated 
 
 - Some source paths and device settings are hard-coded. `App.py` needs local configuration before use, and the camera loader currently forces webcam index `0` for live-camera input.
 - The checked-in action-label mapping groups several output classes under `Fall Down`; it should be reviewed before interpreting model predictions.
-- Email configuration is embedded in the legacy helper scripts. Review or disable those helpers before running the demos; the fall-detection loop may invoke them repeatedly.
+- Email helpers require private environment configuration, and other legacy notification settings still need review. Review or disable those helpers before running the demos; the fall-detection loop may invoke them repeatedly.
 - No current accuracy benchmark or supported runtime environment is documented. This remains an academic prototype rather than a validated safety-monitoring system.
 
 ## Acknowledgments
